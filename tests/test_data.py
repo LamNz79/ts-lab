@@ -1,4 +1,4 @@
-from ts_lab.data import load_transactions
+from ts_lab.data import daily_spending, load_transactions
 
 # Fake export with the quirks we must handle: BOM, non-padded day, cash row without balance, voided row.
 CSV = (
@@ -17,3 +17,13 @@ def test_load_transactions(tmp_path):
     assert list(df.index.astype(str)) == ["2026-11-05 09:22:40", "2026-11-19 07:47:35"]  # day/month order, sorted, voided dropped
     assert df["amount"].tolist() == [-50000, -19000]
     assert df["balance_after"].isna().tolist() == [True, False]  # cash has no bank balance
+
+
+def test_daily_spending(tmp_path):
+    path = tmp_path / "t.csv"
+    path.write_text(CSV, encoding="utf-8")
+    daily = daily_spending(load_transactions(path))
+
+    assert len(daily) == 15  # 5/11..19/11, empty days included
+    assert daily.loc["2026-11-05"] == 50000 and daily.loc["2026-11-19"] == 19000  # positive spending
+    assert daily.loc["2026-11-10"] == 0  # no spending that day -> 0, not NaN

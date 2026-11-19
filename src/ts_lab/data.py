@@ -50,3 +50,15 @@ def load_transactions(path: Path = DATA_DIR / "transactions.csv") -> pd.DataFram
   # raise NotImplementedError
     df = df.set_index("time").sort_index()
     return df
+
+def daily_spending(df: pd.DataFrame, freq: str = "D") -> pd.Series:
+    """Total spending per period (positive VND), using our spending definition."""
+    # Spending = money out in consumption categories. "Chuyển khoản" included:
+    # non-QR payments and transfers to partner for shared spending.
+    is_spend_category = df["category"].isin(["Khác", "Ăn uống", "Hóa đơn", "Chuyển khoản"])
+    is_money_out = df["amount"] < 0
+    spend = df[is_spend_category & is_money_out]
+
+    daily = -spend["amount"].resample(freq).sum()
+    # daily.plot(kind="bar")
+    return daily
