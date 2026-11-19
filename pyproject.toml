@@ -1,0 +1,22 @@
+[project]
+name = "ts-lab"
+version = "0.1.0"
+description = "Learning time series by doing: personal spending + Vietnamese stocks"
+requires-python = ">=3.11,<3.13"
+# Deps for stages 1-2 only; add more (lightgbm, chronos...) when a stage needs them.
+dependencies = [
+    "pandas>=2.2",
+    "numpy",
+    "matplotlib",
+    "statsmodels",
+    "jupyterlab",
+    "ipykernel",
+]
+# vnstock: pending — no longer on PyPI, install source to be decided (see CLAUDE.md).
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ts_lab"]
