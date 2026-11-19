@@ -13,7 +13,7 @@ Tài liệu chính: *Forecasting: Principles and Practice* (Hyndman, fpp3 — ht
 - Không đánh dấu chặng là xong khi chưa đạt tiêu chí "Xong khi".
 
 ## Dữ liệu
-1. **Chi tiêu cá nhân** từ dự án Money-Tracker (`../money-tracker`, Next.js + Postgres). Đường dẫn / định dạng export: *(chưa chốt — ghi vào đây khi người dùng xác nhận)*.
+1. **Chi tiêu cá nhân** từ dự án Money-Tracker (`../money-tracker`, Next.js + Postgres). Export CSV từ trang Giao dịch → `data/transactions.csv` (UTF-8 BOM, time `H:M:S d/m/yy`, amount `-19.000 đ`, voided rows prefixed `[Đã hủy]`, internal transfers hidden). Lần export đầu (2026-11-19): 133 dòng, chỉ 26/10–19/11/2026 → cần dataset công khai cho seasonality.
 2. **Cổ phiếu VN** (giá + khối lượng) qua thư viện `vnstock`. vnstock 6.0.1 cài ở `$HOME\.venv` (Python 3.14, kernel Jupyter "Python (Vnstock)"), không nằm trong `.venv` của dự án — xem AGENTS.md. Nguồn dữ liệu: *chưa chọn*.
 3. Nếu chi tiêu chưa đủ ~1 năm → dùng thêm dataset công khai để học seasonality.
 
@@ -48,3 +48,4 @@ Cập nhật mục này mỗi khi xong một bước đáng kể hoặc xong ch�
 
 - **Chặng hiện tại: 1** — đang bắt đầu.
 - 2026-11-19: Dựng khung dự án (pyproject + uv, `src/ts_lab/`, `notebooks/`, `data/` ignored, git). Đang chờ người dùng cho biết định dạng dữ liệu Money-Tracker.
+- 2026-11-19: vnstock 6.0.1 cài ở `$HOME\.venv` (chưa có nguồn/khoá → phần cổ phiếu tạm hoãn). Export CSV chi tiêu xong; tạo khung `src/ts_lab/data.py::load_transactions` (TODO 1–6) để người dùng tự viết. Tiếp theo: review hàm đó → notebook `01_explore.ipynb` (plot, resample).
