@@ -5,7 +5,7 @@ This project uses the Python library `vnstock` generation 6 (with `vnstock-oapi`
 
 - Environment: `~/.venv` (Windows `$HOME\.venv`) unless noted here. Run code and commands with `~/.venv/bin/python` and `~/.venv/bin/vnstock`. Do not install vnstock into another Python.
 - At the start of a session: run `vnstock onboard` and follow it; `vnstock doctor` when something fails.
-- Every data call names a source: `Market("<nguồn>").equity("FPT").ohlcv(start=...)`, or `vnstock.sources.use(...)` once. The user's source is: <ghi nguồn ở đây>.
+- Every data call names a source: `Market("<nguồn>").equity("FPT").ohlcv(start=...)`, or `vnstock.sources.use(...)` once. The user's source is: tcbs.
 - Keys: the user stores source keys with `vnstock keys set <nguồn>` and logs in with `vnstock login`, in their own terminal. Never ask for a key in chat, never put one in code or print it. `vnstock keys` shows which sources have one.
 - Look functions up before writing them: `vnstock tools`, `vnstock doc Market.equity.ohlcv`.
 - Ratios: compute with `vnstock_quant.fa`; `ratio()`, `Insights`, `Analytics`, `Macro` are not in this release.
