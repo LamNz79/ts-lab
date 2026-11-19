@@ -1,4 +1,5 @@
 """Data loaders. Pure functions returning pandas objects, so notebooks and the future bot can share them."""
+import json
 from pathlib import Path
 
 import pandas as pd
@@ -62,3 +63,19 @@ def daily_spending(df: pd.DataFrame, freq: str = "D") -> pd.Series:
     daily = -spend["amount"].resample(freq).sum()
     # daily.plot(kind="bar")
     return daily
+
+
+def load_prices(path: Path) -> pd.DataFrame:
+    """Load daily OHLCV saved by `vnstock-oapi ohlc tcbs ... -o file.jsonl`.
+
+    One JSON envelope per line; candles live in body["data"]. Prices are in VND.
+    Returns a DataFrame indexed by trading date (sorted, unique): open, high, low, close, volume.
+    """
+    with open(path, encoding="utf-8") as f:
+        rows = [row for line in f for row in json.loads(line)["body"]["data"]]
+    df = pd.DataFrame(rows)
+    # tradingDate is midnight UTC of the trading day -> keep the calendar date, drop the timezone.
+    df["date"] = pd.to_datetime(df["tradingDate"]).dt.tz_localize(None)
+    # Pages overlap at their edges, so the same day can appear twice.
+    df = df.drop_duplicates("date").set_index("date").sort_index()
+    return df[["open", "high", "low", "close", "volume"]]
