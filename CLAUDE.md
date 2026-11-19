@@ -14,7 +14,7 @@ Tài liệu chính: *Forecasting: Principles and Practice* (Hyndman, fpp3 — ht
 
 ## Dữ liệu
 1. **Chi tiêu cá nhân** từ dự án Money-Tracker (`../money-tracker`, Next.js + Postgres). Đường dẫn / định dạng export: *(chưa chốt — ghi vào đây khi người dùng xác nhận)*.
-2. **Cổ phiếu VN** (giá + khối lượng) qua thư viện `vnstock`. vnstock 6.0.1 cài ở `$HOME.venv` (Python 3.14, kernel Jupyter "Python (Vnstock)"), không nằm trong `.venv` của dự án — xem AGENTS.md. Nguồn dữ liệu: *chưa chọn*.
+2. **Cổ phiếu VN** (giá + khối lượng) qua thư viện `vnstock`. vnstock 6.0.1 cài ở `$HOME\.venv` (Python 3.14, kernel Jupyter "Python (Vnstock)"), không nằm trong `.venv` của dự án — xem AGENTS.md. Nguồn dữ liệu: *chưa chọn*.
 3. Nếu chi tiêu chưa đủ ~1 năm → dùng thêm dataset công khai để học seasonality.
 
 `data/` nằm trong .gitignore — không commit dữ liệu cá nhân.

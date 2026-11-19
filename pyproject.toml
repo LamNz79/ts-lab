@@ -12,7 +12,7 @@ dependencies = [
     "jupyterlab",
     "ipykernel",
 ]
-# vnstock gen 6 lives in $HOME.venv (see AGENTS.md), not in this project env.
+# vnstock gen 6 lives in $HOME\.venv (see AGENTS.md), not in this project env.
 
 [build-system]
 requires = ["hatchling"]
