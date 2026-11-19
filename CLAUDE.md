@@ -49,3 +49,4 @@ Cập nhật mục này mỗi khi xong một bước đáng kể hoặc xong ch�
 - **Chặng hiện tại: 1** — đang bắt đầu.
 - 2026-11-19: Dựng khung dự án (pyproject + uv, `src/ts_lab/`, `notebooks/`, `data/` ignored, git). Đang chờ người dùng cho biết định dạng dữ liệu Money-Tracker.
 - 2026-11-19: vnstock 6.0.1 cài ở `$HOME\.venv` (chưa có nguồn/khoá → phần cổ phiếu tạm hoãn). Export CSV chi tiêu xong; tạo khung `src/ts_lab/data.py::load_transactions` (TODO 1–6) để người dùng tự viết. Tiếp theo: review hàm đó → notebook `01_explore.ipynb` (plot, resample).
+- 2026-11-19: Người dùng tự viết xong `load_transactions` (130 dòng sau khi bỏ 3 dòng huỷ; `Int64` vì Ví/tiền mặt không có số dư). Đã học: BOM/`utf-8-sig`, `format` của to_datetime (`%y` vs `%Y`), `~mask`, NaN vs `int64`, đọc traceback. Có `tests/test_data.py`. Lưu ý: notebook đang chứa output dữ liệu thật → chưa commit. Tiếp theo: định nghĩa chuỗi "chi tiêu", resample theo ngày/tuần, vẽ biểu đồ.
